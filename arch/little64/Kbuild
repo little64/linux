@@ -1,0 +1,2 @@
+# Kbuild for Little64 architecture
+# Directory selection is handled in arch/little64/Makefile.

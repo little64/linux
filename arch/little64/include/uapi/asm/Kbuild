@@ -1,0 +1,8 @@
+# Provide Little-64-specific headers
+# byteorder.h, ptrace.h, sigcontext.h, ucontext.h are provided locally
+# Everything else comes from asm-generic
+
+generic-y += kvm_para.h
+
+# Generate __NR_* syscall number headers from the generic table
+syscall-y += unistd_64.h

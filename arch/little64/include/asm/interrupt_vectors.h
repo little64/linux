@@ -1,0 +1,44 @@
+/* SPDX-License-Identifier: GPL-2.0-only */
+#ifndef __ASM_LITTLE64_INTERRUPT_VECTORS_H
+#define __ASM_LITTLE64_INTERRUPT_VECTORS_H
+
+#include <linux/types.h>
+
+#define LITTLE64_TRAP_NONE                    0UL
+
+#define LITTLE64_TRAP_EXEC_ALIGN              1UL
+#define LITTLE64_TRAP_PRIVILEGED_INSTRUCTION  2UL
+#define LITTLE64_TRAP_SYSCALL                 3UL
+#define LITTLE64_TRAP_SYSCALL_FROM_SUPERVISOR 4UL
+#define LITTLE64_TRAP_PAGE_FAULT_NOT_PRESENT  5UL
+#define LITTLE64_TRAP_PAGE_FAULT_PERMISSION   6UL
+#define LITTLE64_TRAP_PAGE_FAULT_RESERVED     7UL
+#define LITTLE64_TRAP_PAGE_FAULT_CANONICAL    8UL
+
+#define LITTLE64_FIRST_EXCEPTION_VECTOR       LITTLE64_TRAP_EXEC_ALIGN
+#define LITTLE64_LAST_EXCEPTION_VECTOR        LITTLE64_TRAP_PAGE_FAULT_CANONICAL
+
+#define LITTLE64_RESERVED_VECTOR              64UL
+#define LITTLE64_IRQ_VECTOR_BASE              65UL
+#define LITTLE64_MAX_VECTOR                   127UL
+#define LITTLE64_VECTOR_COUNT                 128UL
+
+#define LITTLE64_SERIAL_IRQ_VECTOR            65UL
+#define LITTLE64_TIMER_IRQ_VECTOR             66UL
+#define LITTLE64_PVBLK_IRQ_VECTOR             67UL
+
+#define LITTLE64_IRQ_BANK_WIDTH               64UL
+#define LITTLE64_IRQ_MASK_HIGH_VALID_BITS     (~1UL)
+
+#define little64_is_exception_vector(vector) \
+	((vector) >= LITTLE64_FIRST_EXCEPTION_VECTOR && \
+	 (vector) <= LITTLE64_LAST_EXCEPTION_VECTOR)
+
+#define little64_is_irq_vector(vector) \
+	((vector) >= LITTLE64_IRQ_VECTOR_BASE && (vector) <= LITTLE64_MAX_VECTOR)
+
+#define little64_irq_bank(vector) ((vector) / LITTLE64_IRQ_BANK_WIDTH)
+
+#define little64_irq_bit(vector) (1UL << ((vector) % LITTLE64_IRQ_BANK_WIDTH))
+
+#endif /* __ASM_LITTLE64_INTERRUPT_VECTORS_H */

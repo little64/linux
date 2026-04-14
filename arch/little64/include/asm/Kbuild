@@ -1,0 +1,4 @@
+# Most headers come from asm-generic
+# We provide our own: page.h, pgtable.h, pgtable-bits.h, pgalloc.h, mmu.h, mmu_context.h,
+#   processor.h, thread_info.h, current.h, irqflags.h, cmpxchg.h, atomic.h, string.h, cache.h
+# Everything else is generic

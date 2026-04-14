@@ -115,7 +115,7 @@ kallsyms()
 		kallsymopt="${kallsymopt} --all-symbols"
 	fi
 
-	if is_enabled CONFIG_64BIT || is_enabled CONFIG_RELOCATABLE; then
+	if [ "${SRCARCH}" != "little64" ] && (is_enabled CONFIG_64BIT || is_enabled CONFIG_RELOCATABLE); then
 		kallsymopt="${kallsymopt} --pc-relative"
 	fi
 

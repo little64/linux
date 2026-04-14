@@ -1,0 +1,70 @@
+config LITTLE64
+	def_bool y
+	select OF
+	select OF_EARLY_FLATTREE
+	select GENERIC_BUILTIN_DTB
+	select GENERIC_IRQ_CHIP
+	select GENERIC_IRQ_PROBE
+	select GENERIC_IRQ_SHOW
+	select SPARSE_IRQ
+	select IRQ_DOMAIN
+	select GENERIC_CPU_DEVICES
+	select GENERIC_IOREMAP
+	select COMMON_CLK
+	select GENERIC_CLOCKEVENTS_BROADCAST
+	select TIMER_OF
+	select MODULES_USE_ELF_RELA
+	select ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT
+	select THREAD_INFO_IN_TASK
+	select HAVE_REGS_AND_STACK_ACCESS_API
+	select GENERIC_CSUM
+	select STACKTRACE_SUPPORT
+	select GENERIC_HWEIGHT
+	select NO_IOPORT_MAP
+	select FIX_EARLYCON_MEM
+	select ARCH_HAS_ATOMIC64_DEC_IF_POSITIVE
+	select HAVE_ARCH_MMAP_RND_BITS
+	select GENERIC_IRQ_ENTRY
+
+config CPU_LITTLE_ENDIAN
+	def_bool y
+
+config MMU
+	def_bool y
+
+config FIX_EARLYCON_MEM
+	def_bool y
+
+config 64BIT
+	def_bool y
+
+config BUILTIN_DTB_NAME
+	string "Built-in Device Tree Blob name"
+	default "little64"
+
+config NR_CPUS
+	int "Number of CPUs"
+	default 1
+
+config ARCH_LITTLE64
+	bool
+	default y
+
+config BUILTIN_DTB
+	bool "Use built-in device tree"
+	default y
+	help
+	  For the initial port, use a device tree compiled into the kernel
+	  rather than passed by the bootloader.
+
+config PGTABLE_LEVELS
+	int
+	default 3
+
+config ARCH_MMAP_RND_BITS_MIN
+	default 18
+
+config ARCH_MMAP_RND_BITS_MAX
+	default 33
+
+source "kernel/Kconfig.hz"

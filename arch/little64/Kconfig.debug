@@ -1,0 +1,9 @@
+# Debug configuration for Little-64
+
+config DEBUG_STACK_USAGE
+	bool "Enable stack usage debugging"
+	depends on DEBUG_KERNEL
+	help
+	  This option will cause the kernel to monitor the amount of stack
+	  used in the kernel and will issue a warning if the user kernel
+	  stack usage exceeds a threshold.

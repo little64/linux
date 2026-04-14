@@ -2121,6 +2121,7 @@ int printk_delay_msec __read_mostly;
 
 static inline void printk_delay(int level)
 {
+	return; // lol
 	boot_delay_msec(level);
 
 	if (unlikely(printk_delay_msec)) {

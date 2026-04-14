@@ -1,0 +1,58 @@
+/dts-v1/;
+
+/ {
+    #address-cells = <2>;
+    #size-cells = <2>;
+    compatible = "little64,virt";
+    model = "Little-64 Virtual Machine";
+
+    cpus {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        cpu@0 {
+            compatible = "little64";
+            device_type = "cpu";
+            reg = <0>;
+            clock-frequency = <1000000000>;  /* 1 GHz */
+        };
+    };
+
+    intc: interrupt-controller {
+        compatible = "little64,intc";
+        interrupt-controller;
+        #interrupt-cells = <1>;
+    };
+
+    memory@100000 {
+        device_type = "memory";
+        reg = <0x0 0x100000 0x0 0x4000000>;  /* 1 MiB base, 64 MiB size */
+    };
+
+    chosen {
+        bootargs = "console=ttyS0,115200 earlycon=uart8250,mmio,0x08000000,115200n8 ignore_loglevel loglevel=8 root=/dev/l64blk0 rootfstype=ext2 ro rootwait init=/init";
+        stdout-path = "/uart@8000000";
+    };
+
+    uart@8000000 {
+        compatible = "ns16550a";
+        reg = <0x0 0x08000000  0x0 0x8>;
+        interrupt-parent = <&intc>;
+        interrupts = <65>;
+        clock-frequency = <1843200>;
+    };
+
+    timer@8001000 {
+        compatible = "little64,timer";
+        reg = <0x0 0x08001000  0x0 0x20>;
+        interrupt-parent = <&intc>;
+        interrupts = <66>;
+    };
+
+    block@8002000 {
+        compatible = "little64,pvblk";
+        reg = <0x0 0x08002000 0x0 0x100>;
+        interrupt-parent = <&intc>;
+        interrupts = <67>;
+    };
+};

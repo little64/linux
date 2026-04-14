@@ -11,6 +11,7 @@
 # If you can achieve the correct code ordering by linker script, please delete
 # the entry from this file.
 #
+arch/little64/kernel/head.o
 arch/alpha/kernel/head.o
 arch/arc/kernel/head.o
 arch/arm/kernel/head-nommu.o

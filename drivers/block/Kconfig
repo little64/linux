@@ -16,6 +16,15 @@ menuconfig BLK_DEV
 
 if BLK_DEV
 
+config LITTLE64_PVBLK
+	bool "Little64 paravirtual block device"
+	depends on LITTLE64
+	default y
+	help
+	  Built-in MMIO block driver for the Little64 emulator's simple
+	  paravirtual disk device. This is the primary root filesystem path for
+	  Little64 Linux bring-up.
+
 source "drivers/block/null_blk/Kconfig"
 source "drivers/block/rnull/Kconfig"
 
